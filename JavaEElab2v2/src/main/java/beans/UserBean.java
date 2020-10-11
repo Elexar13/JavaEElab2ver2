@@ -6,6 +6,9 @@ import dao.SelectObject;
 
 import javax.enterprise.context.SessionScoped;
 import javax.faces.bean.ManagedBean;
+import javax.faces.context.FacesContext;
+import javax.servlet.http.HttpSession;
+import java.io.IOException;
 import java.io.Serializable;
 import java.util.List;
 
@@ -13,17 +16,21 @@ import java.util.List;
 @SessionScoped
 public class UserBean implements Serializable {
 
-    private static final List<SelectObject> selectedRows = new PrintedEditionDAO().findAll();
-
-    public UserBean() {
-        //PrintedEditionDAO pe = new PrintedEditionDAO();
-        //selectedRows = pe.findAll();
-
-    }
-
     public List<SelectObject> getSelectedRows() {
-//        selectedRows.forEach(System.out::println);
-        return selectedRows;
+        return  new PrintedEditionDAO().findAll();
     }
 
+    public void logOut(){
+        FacesContext facesContext;
+        HttpSession session;
+        facesContext = FacesContext.getCurrentInstance();
+        session = (HttpSession) facesContext.getExternalContext().getSession(true);
+        session.removeAttribute("username");
+        session.removeAttribute("password");
+        try {
+            FacesContext.getCurrentInstance().getExternalContext().redirect("/index.xhtml");
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
 }

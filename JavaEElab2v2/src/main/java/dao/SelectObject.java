@@ -1,14 +1,24 @@
 package dao;
 
 public class SelectObject {
+    private int id;
     private String recipientName;
     private String editionName;
     private String deliveryName;
 
-    public SelectObject(String recipientName, String editionName, String deliveryName) {
+    public SelectObject(int id, String recipientName, String editionName, String deliveryName) {
+        this.id = id;
         this.recipientName = recipientName;
         this.editionName = editionName;
         this.deliveryName = deliveryName;
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
     }
 
     public String getRecipientName() {

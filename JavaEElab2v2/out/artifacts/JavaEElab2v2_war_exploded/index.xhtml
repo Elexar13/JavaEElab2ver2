@@ -5,25 +5,22 @@
       xmlns:h="http://xmlns.jcp.org/jsf/html"
       xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
       xmlns:f="http://xmlns.jcp.org/jsf/core"
-      xmlns:temp = "http://java.sun.com/jsf/composite/temp">
+      xmlns:act = "http://java.sun.com/jsf/composite/actions">
    <f:view>
+       <h:head>
+           <title>Log in</title>
+       </h:head>
+       <h:body style="display: flex; justify-content: center">
       <h:form>
-         <h:outputLabel value="username"/>
-         <h:inputText value="#{loginBean.login}" required="true"/>
-         <h:outputLabel value="password"/>
-         <h:inputText value="#{loginBean.password}" required="true"/>
-         <h:commandButton value="Submit" type="submit" action="#{loginBean.getPage}"/>
+          <act:loginComponent
+                  usernameLabel = "Enter User Name"
+                  usernameValue = "#{logBean.username}"
+                  passwordLabel = "Enter Password"
+                  passwordValue = "#{logBean.password}"
+                  loginButtonLabel = "Submit"
+                  loginButtonAction = "#{logBean.login}" />
+
       </h:form>
-
-
-      <h:form>
-         <temp:loginComponent
-                 usernameValue="#{loginBean.login}"
-                 passwordValue="#{loginBean.password}"
-                 loginButtonLabel="Submit"
-                 loginButtonType="submit"
-            />
-      </h:form>
-
+       </h:body>
    </f:view>
 </html>
